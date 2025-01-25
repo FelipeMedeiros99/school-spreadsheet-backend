@@ -12,3 +12,23 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model Student {
+  id Int @id @unique @default(autoincrement())
+  name String @db.VarChar(100)
+  class String @db.VarChar(10)
+  createdAt DateTime @default(now())
+  
+  
+  userID Int 
+  userId User @relation(fields: [userID], references: [id]) 
+}
+
+model User {
+    id Int @id @unique @default(autoincrement())
+    email String @unique @db.VarChar(200)
+    password String @db.Text
+
+    Students Student[]
+}
