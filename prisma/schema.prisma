@@ -20,7 +20,6 @@ model Student {
   class String @db.VarChar(10)
   createdAt DateTime @default(now())
   
-  
   userId Int 
   userID User @relation(fields: [userId], references: [id]) 
 }

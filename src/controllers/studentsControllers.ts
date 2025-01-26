@@ -9,10 +9,8 @@ export async function getStudentsCountController(req: Request, res: Response, ne
     }catch(e){
       next(e)
     }
-
 }
 
 export function getStudentsController(req: Request, res: Response){
-  console.log(req.query)
-  res.sendStatus(201)
+  res.status(201).send((req as any).students)
 }
