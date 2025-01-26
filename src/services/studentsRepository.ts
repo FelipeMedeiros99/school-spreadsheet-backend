@@ -9,7 +9,7 @@ interface StudentFilter{
 }
 
 export async function countStudentService(filters: StudentFilter){
-  const qtStudents = await countStudentRepository();
+  const qtStudents = await countStudentRepository(filters);
   return qtStudents;
 } 
 
