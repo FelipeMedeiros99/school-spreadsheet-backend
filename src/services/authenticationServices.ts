@@ -39,6 +39,7 @@ export function deleteExpiredTokensService(){
 }
 
 export async function validTokenService(token: string){
+  token = token.replace("Bearer ", "")
   const dbToken = await validTokenRepository(token);
   return dbToken;
 }

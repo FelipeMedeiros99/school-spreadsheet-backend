@@ -75,5 +75,6 @@ export async function validTokenMiddleware(req: Request, res: Response, next: Ne
     return;
   }
 
+  next()
 
 }
