@@ -6,13 +6,13 @@ interface UserDataReceived {
   password: string
 };
 
-export async function saveUserRepository(userData: UserDataReceived){
-  try{  
+export async function saveUserRepository(userData: UserDataReceived) {
+  try {
     await prisma.user.create({
       data: userData
     });
-  }catch(e){
-    throw {message: "Error saving user.", status: 500}
+  } catch (e) {
+    throw { message: "Error saving user.", status: 500 }
   }
 }
 

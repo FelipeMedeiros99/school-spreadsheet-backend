@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from "express"
 import { ObjectSchema } from "joi";
 import { findUser } from "../repositories/userRepositories";
+import { promises } from "dns";
+import { validPasswordIsCorrect } from "../services/passwordServices";
 
 interface UserDataReceived {
   email: string;
@@ -21,17 +23,31 @@ export function validateSchema(schema: ObjectSchema) {
   }
 }
 
-export async function validIfUserAlredExists(req: Request, res: Response, next: NextFunction){
+export async function validIfUserAlredExistsMiddleware(req: Request, res: Response, next: NextFunction){
   const userData = req.body as UserDataReceived;
-  try{
-    const userIsInDatabase = await findUser(userData.email)
-    if(!!userIsInDatabase){
-      throw {message: "Email já cadastrado", status: 409}
-    }
-    next()
-    
-  }catch(e){
-    next(e)
-  }
+  const userIsInDatabase = await findUser(userData.email)
+  if(userIsInDatabase){
+    res.status(409).send("Email já cadastrado");
+    return;
+  };
+  next();
+}
 
+
+export async function validCredentialsMiddleware(req: Request, res: Response, next: NextFunction){
+  const userData = req.body as UserDataReceived;
+  const userIsInDatabase = await findUser(userData.email)
+  if(!userIsInDatabase){
+    res.status(404).send("Email não cadastrado");
+    return;
+  };
+
+  const passwordValidation = await validPasswordIsCorrect(userData.password, userIsInDatabase.password)
+
+  if(!passwordValidation){
+    res.status(401).send("Senha incorreta");
+    return;
+  }
+  
+  next();
 }
