@@ -1,6 +1,6 @@
-import Joi from "joi";
+import Joi, { ObjectSchema } from "joi";
 
-export const userSignUp = {
+export const userSignUpSchema: ObjectSchema = Joi.object({
   email: Joi
     .string()
     .email()
@@ -32,4 +32,4 @@ export const userSignUp = {
       "any.required": "A confirmação de senha é obrigatória."
     })
     
-}
+})
