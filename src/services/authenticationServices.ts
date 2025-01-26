@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import "dotenv/config";
 import jwt from "jsonwebtoken";
-import { deleteExpiredTokensRepository } from "../repositories/authenticationRepositories";
+import { deleteExpiredTokensRepository, validTokenRepository } from "../repositories/authenticationRepositories";
 
 interface UserData{
   id: number;
@@ -36,4 +36,9 @@ export function deleteExpiredTokensService(){
   const oneMinute = 60*1000
   setInterval(async()=> await deleteExpiredTokensRepository(), oneMinute)
 
+}
+
+export async function validTokenService(token: string){
+  const dbToken = await validTokenRepository(token);
+  return dbToken;
 }

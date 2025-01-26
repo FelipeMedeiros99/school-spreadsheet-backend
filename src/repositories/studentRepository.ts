@@ -15,7 +15,10 @@ export async function findStudentsRepository(page: number) {
     const results = 10;
     const students = await prisma.student.findMany({
       skip: results * (page),
-      take: results
+      take: results,
+      orderBy: {
+        name:"asc"
+      }
     });
     return students;
 

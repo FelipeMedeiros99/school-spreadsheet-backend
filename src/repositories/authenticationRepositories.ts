@@ -38,12 +38,23 @@ export async function saveTokenAtDatabaseRepository(userToken: UserDataToken) {
 }
 
 export async function  deleteExpiredTokensRepository() {
-  const fifteenMinutesAgo = new Date(Date.now() - 15 * 60 * 1000)
+  const fifteenMinutesAgo = new Date(Date.now() - 15 * 60 * 1000);
   await prisma.tokens.deleteMany({
     where: {
       createdAt: {
         lt: fifteenMinutesAgo
       }
     }
-  })
+  });
 }
+
+export async function validTokenRepository(token: string) {
+  const dbToken = await prisma.tokens.findFirst({
+    where: {
+      token
+    }
+  })
+
+  return dbToken;
+}
+
