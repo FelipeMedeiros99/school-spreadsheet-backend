@@ -7,8 +7,6 @@ import { generateTokenMiddleware, saveUserDataMiddleware } from "../middlewares/
 
 const autenticatioinRouter = Router();
 
-//TODO: generate token 
-
 autenticatioinRouter.post("/sign-in", 
   validateSchema(userSignInSchema),
   validCredentialsMiddleware,
