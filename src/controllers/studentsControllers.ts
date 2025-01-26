@@ -1,13 +1,18 @@
 import { Request, Response, NextFunction } from "express";
 
-import { countStudentService } from "../services/studentsRepository";
+import { countStudentService, returnFilterValidations } from "../services/studentsRepository";
+import { Interface } from "readline";
+
 
 export async function getStudentsCountController(req: Request, res: Response, next: NextFunction){
+          
+    const studentFilter = returnFilterValidations(req.query);
+
     try{
-      const qtStudents = await countStudentService()
-      res.status(200).send({quantityStudents: qtStudents})
+      const qtStudents = await countStudentService(studentFilter);
+      res.status(200).send({quantityStudents: qtStudents});
     }catch(e){
-      next(e)
+      next(e);
     }
 }
 
