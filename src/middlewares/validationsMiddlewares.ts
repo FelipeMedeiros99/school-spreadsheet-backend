@@ -1,7 +1,12 @@
 import { Request, Response, NextFunction } from "express"
 import { ObjectSchema } from "joi";
+import { findUser } from "../repositories/userRepositories";
 
-
+interface UserDataReceived {
+  email: string;
+  password: string;
+  confirmPassword?: string
+}
 
 export function validateSchema(schema: ObjectSchema) {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -14,4 +19,19 @@ export function validateSchema(schema: ObjectSchema) {
 
     next()
   }
+}
+
+export async function validIfUserAlredExists(req: Request, res: Response, next: NextFunction){
+  const userData = req.body as UserDataReceived;
+  try{
+    const userIsInDatabase = await findUser(userData.email)
+    if(!!userIsInDatabase){
+      throw {message: "Email já cadastrado", status: 409}
+    }
+    next()
+    
+  }catch(e){
+    next(e)
+  }
+
 }

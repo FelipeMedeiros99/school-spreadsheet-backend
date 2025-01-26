@@ -15,3 +15,14 @@ export async function saveUserRepository(userData: UserDataReceived){
     throw {message: "Error saving user.", status: 500}
   }
 }
+
+
+export async function findUser(userEmail: string) {
+  const userInDatabase = await prisma.user.findFirst({
+    where: {
+      email: userEmail
+    }
+  })
+
+  return userInDatabase
+}
