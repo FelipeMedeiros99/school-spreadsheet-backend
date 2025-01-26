@@ -23,7 +23,7 @@ export async function saveUserDataMiddleware(req: Request, res: Response, next: 
   delete userData.confirmPassword;
 
   try {
-    await saveUserRepository(userData)
+    await saveUserRepository({...userData, email: userData.email.toLowerCase()})
     next()
 
   } catch (e) {

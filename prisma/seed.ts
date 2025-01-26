@@ -29,7 +29,7 @@ async function addStudents(){
   for(let i=0; i<200; i++){
    
     students.push({
-      name: faker.internet.email().toUpperCase(),
+      name: faker.person.fullName().toUpperCase(),
       class: `${randonInt(1, 5)}${letters[randonInt(0, 5)]}`,
       age: randonInt(5, 17),
       userId: randonInt(1, 20)

@@ -24,7 +24,7 @@ export function validateSchema(schema: ObjectSchema) {
 
 export async function validIfUserAlredExistsMiddleware(req: Request, res: Response, next: NextFunction){
   const userData = req.body as UserDataReceived;
-  const userIsInDatabase = await findUserRepository(userData.email)
+  const userIsInDatabase = await findUserRepository(userData.email.toLowerCase())
   if(userIsInDatabase){
     res.status(409).send("Email já cadastrado");
     return;
@@ -35,7 +35,7 @@ export async function validIfUserAlredExistsMiddleware(req: Request, res: Respon
 
 export async function validCredentialsMiddleware(req: Request, res: Response, next: NextFunction){
   const userData = req.body as UserDataReceived;
-  const userIsInDatabase = await findUserRepository(userData.email)
+  const userIsInDatabase = await findUserRepository(userData.email.toLowerCase())
   if(!userIsInDatabase){
     res.status(404).send("Email não cadastrado");
     return;
