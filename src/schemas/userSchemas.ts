@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const userSignUp = {
+export const userSignUp = {
   email: Joi
     .string()
     .email()
