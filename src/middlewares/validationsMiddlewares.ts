@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import { ObjectSchema } from "joi";
-import { findUserRepository } from "../repositories/userRepositories";
-import { validPasswordIsCorrect } from "../services/userServices";
+import { findUserRepository } from "../repositories/authenticationRepositories";
+import { validPasswordIsCorrect } from "../services/authenticationServices";
 
 interface UserDataReceived {
   email: string;

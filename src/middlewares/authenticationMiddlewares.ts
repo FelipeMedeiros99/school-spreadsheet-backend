@@ -3,8 +3,8 @@ import { User } from "@prisma/client";
 import jwt from "jsonwebtoken";
 import "dotenv/config"
 
-import { saveTokenAtDatabaseRepository, saveUserRepository } from "../repositories/userRepositories";
-import { encryptPassword, generateTokenService } from "../services/userServices";
+import { saveTokenAtDatabaseRepository, saveUserRepository } from "../repositories/authenticationRepositories";
+import { encryptPassword, generateTokenService } from "../services/authenticationServices";
 
 interface ConfirmPassword {
   confirmPassword?: string

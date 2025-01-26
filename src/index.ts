@@ -4,7 +4,7 @@ import "dotenv/config";
 
 import router from "./routers";
 import errorHandleMiddleware from "./middlewares/errorHandleMiddleware";
-import { deleteExpiredTokensService } from "./services/userServices";
+import { deleteExpiredTokensService } from "./services/authenticationServices";
 
 const app = express();
 app.use(cors());

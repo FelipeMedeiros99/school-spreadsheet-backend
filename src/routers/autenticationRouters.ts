@@ -3,7 +3,7 @@ import { Router } from "express";
 import { signInController, signUpController } from "../controllers/authenticationControllers";
 import { validateSchema, validCredentialsMiddleware, validIfUserAlredExistsMiddleware } from "../middlewares/validationsMiddlewares";
 import { userSignInSchema, userSignUpSchema } from "../schemas/userSchemas";
-import { generateTokenMiddleware, saveUserDataMiddleware } from "../middlewares/userMiddlewares";
+import { generateTokenMiddleware, saveUserDataMiddleware } from "../middlewares/authenticationMiddlewares";
 
 const autenticatioinRouter = Router();
 
