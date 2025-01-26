@@ -18,6 +18,7 @@ model Student {
   id Int @id @unique @default(autoincrement())
   name String @db.VarChar(100)
   class String @db.VarChar(10)
+  age Int
   createdAt DateTime @default(now())
   
   userId Int 
