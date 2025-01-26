@@ -22,23 +22,40 @@ export async function countStudentRepository(filters: StudentFilter) {
   const qtStudents = await prisma.student.count()
   return qtStudents
   
-
-
-  } catch (e) {
+} catch (e) {
     throw { message: "Error counting students.", status: 500 }
   }
 }
 
-export async function findStudentsRepository(page: number) {
+export async function findStudentsRepository(page: number, filters: StudentFilter) {
   try {
     const results = 10;
+    const {type, filter} = filters
+
+    if(type === ""){
+      const students = await prisma.student.findMany({
+        skip: results * (page),
+        take: results,
+        orderBy: {
+          name: "asc"
+        }
+      });
+      return students;
+    }
+    
     const students = await prisma.student.findMany({
       skip: results * (page),
       take: results,
       orderBy: {
         name: "asc"
+      },
+      where: {
+        [type]: {
+          contains: filter.toUpperCase()
+        }
       }
     });
+    
     return students;
 
   } catch (e) {

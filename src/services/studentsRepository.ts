@@ -13,8 +13,8 @@ export async function countStudentService(filters: StudentFilter){
   return qtStudents;
 } 
 
-export async function findStudentsService(page: number){
-  const students = await findStudentsRepository(page);
+export async function findStudentsService(page: number, filters: StudentFilter){
+  const students = await findStudentsRepository(page, filters);
   return students;
 } 
 
