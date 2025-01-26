@@ -37,6 +37,7 @@ model User {
 model Tokens{
   id Int @id @unique @default(autoincrement())
   createdAt DateTime @default(now())
+  token String
   
   userId Int
   userID User @relation(fields: [userId], references: [id])

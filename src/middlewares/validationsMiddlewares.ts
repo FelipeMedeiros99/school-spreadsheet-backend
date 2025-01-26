@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import { ObjectSchema } from "joi";
-import { findUser } from "../repositories/userRepositories";
-import { promises } from "dns";
-import { validPasswordIsCorrect } from "../services/passwordServices";
+import { findUserRepository } from "../repositories/userRepositories";
+import { validPasswordIsCorrect } from "../services/userServices";
 
 interface UserDataReceived {
   email: string;
@@ -25,7 +24,7 @@ export function validateSchema(schema: ObjectSchema) {
 
 export async function validIfUserAlredExistsMiddleware(req: Request, res: Response, next: NextFunction){
   const userData = req.body as UserDataReceived;
-  const userIsInDatabase = await findUser(userData.email)
+  const userIsInDatabase = await findUserRepository(userData.email)
   if(userIsInDatabase){
     res.status(409).send("Email já cadastrado");
     return;
@@ -36,7 +35,7 @@ export async function validIfUserAlredExistsMiddleware(req: Request, res: Respon
 
 export async function validCredentialsMiddleware(req: Request, res: Response, next: NextFunction){
   const userData = req.body as UserDataReceived;
-  const userIsInDatabase = await findUser(userData.email)
+  const userIsInDatabase = await findUserRepository(userData.email)
   if(!userIsInDatabase){
     res.status(404).send("Email não cadastrado");
     return;
@@ -48,6 +47,8 @@ export async function validCredentialsMiddleware(req: Request, res: Response, ne
     res.status(401).send("Senha incorreta");
     return;
   }
+
+  (req as any).userDataDatabase = userIsInDatabase
   
   next();
 }

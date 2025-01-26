@@ -3,8 +3,13 @@ import prisma from "../config";
 
 interface UserDataReceived {
   email: string;
-  password: string
+  password: string;
 };
+
+interface UserDataToken{
+  token: string;
+  userId: number
+}
 
 export async function saveUserRepository(userData: UserDataReceived) {
   try {
@@ -16,8 +21,7 @@ export async function saveUserRepository(userData: UserDataReceived) {
   }
 }
 
-
-export async function findUser(userEmail: string) {
+export async function findUserRepository(userEmail: string) {
   const userInDatabase = await prisma.user.findFirst({
     where: {
       email: userEmail
@@ -26,3 +30,10 @@ export async function findUser(userEmail: string) {
 
   return userInDatabase
 }
+
+export async function saveTokenAtDatabaseRepository(userToken: UserDataToken) {
+  await prisma.tokens.create({
+    data: userToken
+  })
+}
+

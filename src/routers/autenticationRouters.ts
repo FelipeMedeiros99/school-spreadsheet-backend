@@ -3,7 +3,7 @@ import { Router } from "express";
 import { signInController, signUpController } from "../controllers/authenticationControllers";
 import { validateSchema, validCredentialsMiddleware, validIfUserAlredExistsMiddleware } from "../middlewares/validationsMiddlewares";
 import { userSignInSchema, userSignUpSchema } from "../schemas/userSchemas";
-import { saveUserDataMiddleware } from "../middlewares/userMiddlewares";
+import { generateTokenMiddleware, saveUserDataMiddleware } from "../middlewares/userMiddlewares";
 
 const autenticatioinRouter = Router();
 
@@ -12,6 +12,7 @@ const autenticatioinRouter = Router();
 autenticatioinRouter.post("/sign-in", 
   validateSchema(userSignInSchema),
   validCredentialsMiddleware,
+  generateTokenMiddleware,
   signInController
 );
 
