@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 
-import { countStudentService, returnFilterValidations } from "../services/studentsRepository";
+import { countStudentService, returnFilterValidationsService } from "../services/studentsServices";
 
 
 export async function getStudentsCountController(req: Request, res: Response, next: NextFunction){
           
-    const studentFilter = returnFilterValidations(req.query);
+    const studentFilter = returnFilterValidationsService(req.query);
 
     try{
       const qtStudents = await countStudentService(studentFilter);
@@ -20,5 +20,6 @@ export function getStudentsController(req: Request, res: Response){
 }
 
 export function addStudentController(req: Request, res: Response){
-  res.status(201).send((req as any).students)
+
+  res.status(201).send(req.body)
 }

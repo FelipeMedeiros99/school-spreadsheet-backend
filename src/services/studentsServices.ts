@@ -18,7 +18,7 @@ export async function findStudentsService(page: number, filters: StudentFilter){
   return students;
 } 
 
-export function returnFilterValidations(query: any){
+export function returnFilterValidationsService(query: any){
   let type = query?.type as Type;
   let filter = query?.filter as string;
   
