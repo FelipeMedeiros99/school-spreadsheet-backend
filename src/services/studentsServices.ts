@@ -1,9 +1,12 @@
+import { Student } from "@prisma/client";
 import { countStudentRepository, findStudentsRepository, saveStudentAtDatabaseRepository } from "../repositories/studentRepository";
 
 
 type Type = "name" | "class" | "age" | "";
 
-interface StudentFilter{
+type ProcessDataTypes = "newStudent" | "editStudent"
+
+interface StudentFilter {
   type: "name" | "class" | "age" | "",
   filter: string
 }
@@ -15,40 +18,53 @@ export interface StudentData {
   name: string
 }
 
-export async function countStudentService(filters: StudentFilter){
+export interface EditStudentData extends Omit<StudentData, "userId"> { studentId: number }
+
+export async function countStudentService(filters: StudentFilter) {
   const qtStudents = await countStudentRepository(filters);
   return qtStudents;
-} 
+}
 
-export async function findStudentsService(page: number, filters: StudentFilter){
+export async function findStudentsService(page: number, filters: StudentFilter) {
   const students = await findStudentsRepository(page, filters);
   return students;
-} 
+}
 
-export function returnFilterValidationsService(query: any){
+export function returnFilterValidationsService(query: any) {
   let type = query?.type as Type;
   let filter = query?.filter as string;
-  
-  if(type !== "name" && type !== "class" && type !== "age") type = "";
-  if(!filter) filter = "";
 
-  const studentFilter: StudentFilter = {"type": type, "filter": filter};
+  if (type !== "name" && type !== "class" && type !== "age") type = "";
+  if (!filter) filter = "";
+
+  const studentFilter: StudentFilter = { "type": type, "filter": filter };
 
   return studentFilter;
 }
 
-export function processStudentDataService(studentData: StudentData){
-  studentData = { 
-    age: Number(studentData.age), 
-    userId: Number(studentData.userId),
-    class: studentData.class.toUpperCase(),
-    name: studentData.name.toUpperCase()
+export function processStudentDataService(studentData: StudentData | EditStudentData, type: ProcessDataTypes) {
+  if (type === "newStudent") {
+    const student: StudentData = {
+      age: Number(studentData.age),
+      userId: Number((studentData as StudentData).userId),
+      class: studentData.class.toUpperCase(),
+      name: studentData.name.toUpperCase()
+    }
+    return student
+  }
+  if(type === "editStudent"){
+    const student: Omit<Student, "userId" | "createdAt"> = {
+      age: Number(studentData.age),
+      id: Number((studentData as EditStudentData).studentId),
+      class: studentData.class.toUpperCase(),
+      name: studentData.name.toUpperCase()
+    }
+    return student
   }
 
-  return studentData
 }
 
-export async function saveStudentAtDatabaseService(studentData: StudentData){
+export async function saveStudentAtDatabaseService(studentData: StudentData) {
   await saveStudentAtDatabaseRepository(studentData)
-  
+
 }

@@ -20,18 +20,24 @@ export function getStudentsController(req: Request, res: Response) {
 }
 
 export async function addStudentController(req: Request, res: Response, next: NextFunction) {
+  const studentData = processStudentDataService(req.body, "newStudent")
 
-  const studentData = processStudentDataService(req.body)
-  
   try {
-    await saveStudentAtDatabaseService(studentData)
+    await saveStudentAtDatabaseService(studentData as StudentData)
     res.sendStatus(201)
   } catch (e) {
     next(e)
   }
-
 }
 
 export async function editStudentController(req: Request, res: Response, next: NextFunction) {
-  res.send(200)
+  const studentData = processStudentDataService(req.body, "editStudent")
+  try {
+
+  } catch (e) {
+    next(e)
+  }
+
+
+  res.sendStatus(200)
 }
