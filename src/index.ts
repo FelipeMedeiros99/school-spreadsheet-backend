@@ -13,6 +13,6 @@ app.use(json());
 app.use(router);
 app.use(errorHandleMiddleware);
 
-// deleteExpiredTokensService()
+deleteExpiredTokensService()
 
 app.listen(process.env.PORT, ()=>console.log("app running"));
