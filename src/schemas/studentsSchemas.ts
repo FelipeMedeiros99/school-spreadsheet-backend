@@ -30,10 +30,12 @@ export const studentSchema = Joi.object({
   class: Joi
     .string()
     .max(10)
+    .min(1)
     .required()
     .messages({
       "string.base": "A turma deve ser uma string.",
       "string.max": "A turma deve possuir no máximo, 10 caracteres.",
+      "string.empty": "A classe não posse ser vazia",
       "any.required": "Informar a turma é obrigatorio."
     }),
 
