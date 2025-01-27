@@ -31,3 +31,7 @@ export async function addStudentController(req: Request, res: Response, next: Ne
   }
 
 }
+
+export async function editStudentController(req: Request, res: Response, next: NextFunction) {
+  res.send(200)
+}
