@@ -8,6 +8,7 @@ interface StudentFilter {
 
 export async function countStudentRepository(filters: StudentFilter) {
   const { type, filter } = filters;
+
   try {
     if (type !== "") {
       const qtStudents = await prisma.student.count({
@@ -60,7 +61,7 @@ export async function findStudentsRepository(page: number, filters: StudentFilte
     return students;
 
   } catch (e) {
-    throw { message: "error searching for students.", status: 500 }
+    throw { message: "Erro ao buscar estudantes.", status: 500 }
   }
 }
 

@@ -48,7 +48,6 @@ export const studentSchema = Joi.object({
     })
 })
 
-
 export const updateStudentSchema = Joi.object({
   age: Joi
     .number()

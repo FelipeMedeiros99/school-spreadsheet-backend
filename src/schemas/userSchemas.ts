@@ -31,9 +31,8 @@ export const userSignUpSchema: ObjectSchema = Joi.object({
       "any.only": "As senhas precisam coincidir.",
       "any.required": "A confirmação de senha é obrigatória."
     })
-    
-})
 
+})
 
 export const userSignInSchema: ObjectSchema = Joi.object({
   email: Joi

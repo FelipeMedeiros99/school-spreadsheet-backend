@@ -9,13 +9,9 @@ interface ConfirmPassword {
   confirmPassword?: string
 }
 
-
 type UserDataReceived = Omit<User, "id"> & ConfirmPassword
 
-
-
 export async function saveUserDataMiddleware(req: Request, res: Response, next: NextFunction) {
-
   const { body } = req;
   const userData = body as UserDataReceived;
 
@@ -23,17 +19,14 @@ export async function saveUserDataMiddleware(req: Request, res: Response, next: 
   delete userData.confirmPassword;
 
   try {
-    await saveUserRepository({...userData, email: userData.email.toLowerCase()})
+    await saveUserRepository({ ...userData, email: userData.email.toLowerCase() })
     next()
-
   } catch (e) {
     next(e)
   }
 }
 
-
 export async function generateTokenMiddleware(req: Request, res: Response, next: NextFunction) {
-
   const userDataDatabase = (req as any).userDataDatabase as User;
   const token = generateTokenService(userDataDatabase);
   (req as any).token = token;
@@ -44,6 +37,5 @@ export async function generateTokenMiddleware(req: Request, res: Response, next:
   } catch (e) {
     next(e)
   }
-
   next()
 }

@@ -1,4 +1,3 @@
-import { response } from "express";
 import prisma from "../config";
 
 interface UserDataReceived {
@@ -6,7 +5,7 @@ interface UserDataReceived {
   password: string;
 };
 
-interface UserDataToken{
+interface UserDataToken {
   token: string;
   userId: number
 }
@@ -37,7 +36,7 @@ export async function saveTokenAtDatabaseRepository(userToken: UserDataToken) {
   })
 }
 
-export async function  deleteExpiredTokensRepository() {
+export async function deleteExpiredTokensRepository() {
   const fifteenMinutesAgo = new Date(Date.now() - 15 * 60 * 1000);
   await prisma.tokens.deleteMany({
     where: {

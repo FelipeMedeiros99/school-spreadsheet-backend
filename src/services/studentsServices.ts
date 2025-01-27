@@ -19,7 +19,6 @@ export interface StudentData {
 
 export interface EditStudentData extends Omit<StudentData, "userId"> { studentId: number }
 
-
 export async function countStudentService(filters: StudentFilter) {
   const qtStudents = await countStudentRepository(filters);
   return qtStudents;
@@ -73,14 +72,10 @@ export async function editStudentAtDatabaseService(studentData: EditStudentData)
   await editStudentAtDatabaseRepository(studentData)
 }
 
-export async function deleteStudentAtDatabaseService(id: number) {
-  await deleteStudentAtDatabaseRepository(id)
-}
-
 export function validIfIdIsValid(id: any) {
   id = Number(id)
-  if(isNaN(id as any)){
-    throw {message: "O id precisa ser válido", status: 400}
+  if (isNaN(id as any)) {
+    throw { message: "O id precisa ser válido", status: 400 }
   }
   return id as number;
 }
@@ -90,3 +85,6 @@ export async function findStudentExistAtDatabaseService(id: any) {
   return student;
 }
 
+export async function deleteStudentAtDatabaseService(id: number) {
+  await deleteStudentAtDatabaseRepository(id)
+}

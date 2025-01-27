@@ -26,16 +26,19 @@ export function validateSchema(schema: ObjectSchema) {
 export async function validIfUserAlredExistsMiddleware(req: Request, res: Response, next: NextFunction) {
   const userData = req.body as UserDataReceived;
   const userIsInDatabase = await findUserRepository(userData.email.toLowerCase())
+
   if (userIsInDatabase) {
     res.status(409).send("Email já cadastrado");
     return;
   };
+
   next();
 }
 
 export async function validCredentialsMiddleware(req: Request, res: Response, next: NextFunction) {
   const userData = req.body as UserDataReceived;
   const userIsInDatabase = await findUserRepository(userData.email.toLowerCase())
+
   if (!userIsInDatabase) {
     res.status(404).send("Email não cadastrado");
     return;
@@ -49,7 +52,6 @@ export async function validCredentialsMiddleware(req: Request, res: Response, ne
   }
 
   (req as any).userDataDatabase = userIsInDatabase
-
   next();
 }
 
@@ -63,6 +65,7 @@ export async function validTokenMiddleware(req: Request, res: Response, next: Ne
   }
 
   const userTokenFormatIsValid = bearerRegex.test(userToken)
+
   if (!userTokenFormatIsValid) {
     res.status(401).send("Token precisa seguir o formato: Bearer <token>");
     return;
@@ -80,15 +83,16 @@ export async function validTokenMiddleware(req: Request, res: Response, next: Ne
 }
 
 export async function validIfStudentExistsMiddleware(req: Request, res: Response, next: NextFunction) {
-  try{
+  try {
     const id = validIfIdIsValid(req.params?.id)
     const studentIsInDatabase = await findStudentExistAtDatabaseService(id);
+
     if (!studentIsInDatabase) {
       res.status(404).send("O estudante não existe");
       return;
     };
     next();
-  }catch(e){
+  } catch (e) {
     next(e)
   }
 }

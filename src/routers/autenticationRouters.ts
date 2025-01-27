@@ -7,17 +7,17 @@ import { generateTokenMiddleware, saveUserDataMiddleware } from "../middlewares/
 
 const autenticatioinRouter = Router();
 
-autenticatioinRouter.post("/sign-in", 
+autenticatioinRouter.post("/sign-in",
   validateSchema(userSignInSchema),
   validCredentialsMiddleware,
   generateTokenMiddleware,
   signInController
 );
 
-autenticatioinRouter.post("/sign-up", 
-  validateSchema(userSignUpSchema), 
+autenticatioinRouter.post("/sign-up",
+  validateSchema(userSignUpSchema),
   validIfUserAlredExistsMiddleware,
-  saveUserDataMiddleware, 
+  saveUserDataMiddleware,
   signUpController
 );
 
