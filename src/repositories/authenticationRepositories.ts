@@ -58,3 +58,13 @@ export async function validTokenRepository(token: string) {
   return dbToken;
 }
 
+export async function findStudentRepository(id: number) {
+  const studentIsInDatabase = await prisma.user.findFirst({
+    where: {
+      id
+    }
+  })
+
+  return studentIsInDatabase
+}
+

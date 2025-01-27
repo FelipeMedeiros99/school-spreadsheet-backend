@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import { countStudentService, editStudentAtDatabaseService, EditStudentData, processStudentDataService, returnFilterValidationsService, saveStudentAtDatabaseService, StudentData } from "../services/studentsServices";
-
+import { countStudentService, deleteStudentAtDatabaseService, editStudentAtDatabaseService, EditStudentData, processStudentDataService, returnFilterValidationsService, saveStudentAtDatabaseService, StudentData } from "../services/studentsServices";
 
 export async function getStudentsCountController(req: Request, res: Response, next: NextFunction) {
 
@@ -31,10 +30,21 @@ export async function addStudentController(req: Request, res: Response, next: Ne
 }
 
 export async function editStudentController(req: Request, res: Response, next: NextFunction) {
-  const studentData = processStudentDataService(req.body, "editStudent") 
+  const studentData = processStudentDataService(req.body, "editStudent")
   try {
     await editStudentAtDatabaseService(studentData)
     res.status(200).send(studentData)
+  } catch (e) {
+    next(e)
+  }
+}
+
+export async function deleteStudentController(req: Request, res: Response, next: NextFunction) {
+  const id = req.params?.id
+  
+  try {
+    deleteStudentAtDatabaseService(id)
+    res.send("deleted").status(204)
   } catch (e) {
     next(e)
   }

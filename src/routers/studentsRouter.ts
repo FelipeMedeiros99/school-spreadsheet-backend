@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import { addStudentController, editStudentController, getStudentsController, getStudentsCountController } from "../controllers/studentsControllers";
+import { addStudentController, deleteStudentController, editStudentController, getStudentsController, getStudentsCountController } from "../controllers/studentsControllers";
 import { findStudentsController } from "../middlewares/studentsMiddlewares";
-import { validateSchema, validTokenMiddleware } from "../middlewares/validationsMiddlewares";
+import { validateSchema, validIfStudentExistsMiddleware, validTokenMiddleware } from "../middlewares/validationsMiddlewares";
 import { studentSchema, updateStudentSchema } from "../schemas/studentsSchemas";
 
 
@@ -13,5 +13,6 @@ studentsRouter.get("/students", validTokenMiddleware, findStudentsController, ge
 
 studentsRouter.post("/students", validTokenMiddleware, validateSchema(studentSchema), addStudentController)
 studentsRouter.put("/students", validTokenMiddleware, validateSchema(updateStudentSchema), editStudentController)
+studentsRouter.delete("/students/:id", validTokenMiddleware, validIfStudentExistsMiddleware, deleteStudentController)
 
 export default studentsRouter;

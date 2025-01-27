@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express"
 import { ObjectSchema } from "joi";
 import { findUserRepository, validTokenRepository } from "../repositories/authenticationRepositories";
 import { validPasswordIsCorrect, validTokenService } from "../services/authenticationServices";
+import { findStudentExistAtDatabaseService, findStudentsService, validIfIdIsValid } from "../services/studentsServices";
 
 interface UserDataReceived {
   email: string;
@@ -52,7 +53,6 @@ export async function validCredentialsMiddleware(req: Request, res: Response, ne
   next();
 }
 
-
 export async function validTokenMiddleware(req: Request, res: Response, next: NextFunction) {
   const userToken = req.headers?.authorization;
   const bearerRegex = /^Bearer\s[a-zA-Z0-9\-_.+~]+$/;
@@ -77,4 +77,18 @@ export async function validTokenMiddleware(req: Request, res: Response, next: Ne
 
   next()
 
+}
+
+export async function validIfStudentExistsMiddleware(req: Request, res: Response, next: NextFunction) {
+  try{
+    const id = validIfIdIsValid(req.params?.id)
+    const studentIsInDatabase = await findStudentExistAtDatabaseService(id);
+    if (!studentIsInDatabase) {
+      res.status(404).send("O estudante não existe");
+      return;
+    };
+    next();
+  }catch(e){
+    next(e)
+  }
 }

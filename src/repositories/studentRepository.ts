@@ -66,13 +66,13 @@ export async function findStudentsRepository(page: number, filters: StudentFilte
 
 export async function saveStudentAtDatabaseRepository(studentData: StudentData) {
   try {
-    
+
     await prisma.student.create({
       data: studentData
     })
 
-  }catch(e){
-    throw {message: "Erro ao adicionar estudante", status: 500}
+  } catch (e) {
+    throw { message: "Erro ao adicionar estudante", status: 500 }
   }
 }
 
@@ -88,9 +88,31 @@ export async function editStudentAtDatabaseRepository(studentData: EditStudentDa
         name: studentData.name
       }
     })
-  }catch(e){
+  } catch (e) {
     console.log(e)
-    throw {message: "Erro ao editar dados do estudante", status: 500}
+    throw { message: "Erro ao editar dados do estudante", status: 500 }
   }
 }
 
+export async function deleteStudentAtDatabaseRepository(id: number) {
+  try {
+    await prisma.student.delete({
+      where: {
+        id
+      }
+    })
+  } catch (e) {
+    console.log(e)
+    throw { message: "Erro ao editar dados do estudante", status: 500 }
+  }
+}
+
+export async function findStudentExistAtDatabaseRepository(id: number) {
+  const student = await prisma.student.findFirst({
+    where: {
+      id
+    }
+  })
+
+  return student;
+}
