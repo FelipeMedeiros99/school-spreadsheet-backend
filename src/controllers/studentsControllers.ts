@@ -13,7 +13,7 @@ export async function getStudentsCountController(req: Request, res: Response, ne
 }
 
 export function getStudentsController(req: Request, res: Response) {
-  res.status(201).send((req as any).students);
+  res.status(200).send((req as any).students);
 }
 
 export async function addStudentController(req: Request, res: Response, next: NextFunction) {
