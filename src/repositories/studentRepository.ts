@@ -1,5 +1,5 @@
 import prisma from "../config";
-import { StudentData } from "../services/studentsServices";
+import { EditStudentData, StudentData } from "../services/studentsServices";
 
 interface StudentFilter {
   type: "name" | "class" | "age" | "",
@@ -75,3 +75,22 @@ export async function saveStudentAtDatabaseRepository(studentData: StudentData) 
     throw {message: "Erro ao adicionar estudante", status: 500}
   }
 }
+
+export async function editStudentAtDatabaseRepository(studentData: EditStudentData) {
+  try {
+    await prisma.student.update({
+      where: {
+        id: studentData.studentId
+      },
+      data: {
+        age: studentData.age,
+        class: studentData.class,
+        name: studentData.name
+      }
+    })
+  }catch(e){
+    console.log(e)
+    throw {message: "Erro ao editar dados do estudante", status: 500}
+  }
+}
+

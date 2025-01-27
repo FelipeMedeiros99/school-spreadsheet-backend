@@ -1,5 +1,5 @@
 import { Student } from "@prisma/client";
-import { countStudentRepository, findStudentsRepository, saveStudentAtDatabaseRepository } from "../repositories/studentRepository";
+import { countStudentRepository, editStudentAtDatabaseRepository, findStudentsRepository, saveStudentAtDatabaseRepository } from "../repositories/studentRepository";
 
 
 type Type = "name" | "class" | "age" | "";
@@ -50,21 +50,26 @@ export function processStudentDataService(studentData: StudentData | EditStudent
       class: studentData.class.toUpperCase(),
       name: studentData.name.toUpperCase()
     }
-    return student
+    return student as any
   }
   if(type === "editStudent"){
-    const student: Omit<Student, "userId" | "createdAt"> = {
+    const student:  EditStudentData = {
       age: Number(studentData.age),
-      id: Number((studentData as EditStudentData).studentId),
+      studentId: Number((studentData as EditStudentData).studentId),
       class: studentData.class.toUpperCase(),
       name: studentData.name.toUpperCase()
     }
-    return student
+    return student as any
   }
 
+  throw {message: "O type deve ser 'newStudent' ou 'editStudent'"}
 }
 
 export async function saveStudentAtDatabaseService(studentData: StudentData) {
   await saveStudentAtDatabaseRepository(studentData)
-
 }
+
+export async function editStudentAtDatabaseService(studentData: EditStudentData) {
+  await editStudentAtDatabaseRepository(studentData)
+}
+
