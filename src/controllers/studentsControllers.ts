@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
 import { countStudentService, returnFilterValidations } from "../services/studentsRepository";
-import { Interface } from "readline";
 
 
 export async function getStudentsCountController(req: Request, res: Response, next: NextFunction){
@@ -17,5 +16,9 @@ export async function getStudentsCountController(req: Request, res: Response, ne
 }
 
 export function getStudentsController(req: Request, res: Response){
+  res.status(201).send((req as any).students)
+}
+
+export function addStudentController(req: Request, res: Response){
   res.status(201).send((req as any).students)
 }
