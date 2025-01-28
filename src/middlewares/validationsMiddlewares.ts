@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from "express"
 import { ObjectSchema } from "joi";
-import { findUserRepository, validTokenRepository } from "../repositories/authenticationRepositories";
-import { validPasswordIsCorrect, validTokenService } from "../services/authenticationServices";
-import { findStudentExistAtDatabaseService, findStudentsService, validIfIdIsValid } from "../services/studentsServices";
+
+import { findUserRepository } from "../repositories/authenticationRepositories.js";
+import { validPasswordIsCorrect, validTokenService } from "../services/authenticationServices.js";
+import { findStudentExistAtDatabaseService, validIfIdIsValid } from "../services/studentsServices.js";
 
 interface UserDataReceived {
   email: string;

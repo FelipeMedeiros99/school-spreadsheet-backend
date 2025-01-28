@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import { countStudentService, deleteStudentAtDatabaseService, editStudentAtDatabaseService, EditStudentData, processStudentDataService, returnFilterValidationsService, saveStudentAtDatabaseService, StudentData } from "../services/studentsServices";
+import { countStudentService, deleteStudentAtDatabaseService, editStudentAtDatabaseService, EditStudentData, processStudentDataService, returnFilterValidationsService, saveStudentAtDatabaseService, StudentData } from "../services/studentsServices.js";
 
 export async function getStudentsCountController(req: Request, res: Response, next: NextFunction) {
   const studentFilter = returnFilterValidationsService(req.query);

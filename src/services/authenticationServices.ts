@@ -1,7 +1,8 @@
 import bcrypt from "bcrypt";
 import "dotenv/config";
 import jwt from "jsonwebtoken";
-import { deleteExpiredTokensRepository, validTokenRepository } from "../repositories/authenticationRepositories";
+
+import { deleteExpiredTokensRepository, validTokenRepository } from "../repositories/authenticationRepositories.js";
 
 interface UserData {
   id: number;

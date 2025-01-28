@@ -2,8 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import { User } from "@prisma/client";
 import "dotenv/config"
 
-import { saveTokenAtDatabaseRepository, saveUserRepository } from "../repositories/authenticationRepositories";
-import { encryptPassword, generateTokenService } from "../services/authenticationServices";
+import { saveTokenAtDatabaseRepository, saveUserRepository } from "../repositories/authenticationRepositories.js";
+import { encryptPassword, generateTokenService } from "../services/authenticationServices.js";
 
 interface ConfirmPassword {
   confirmPassword?: string

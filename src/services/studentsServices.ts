@@ -1,4 +1,4 @@
-import { countStudentRepository, deleteStudentAtDatabaseRepository, editStudentAtDatabaseRepository, findStudentExistAtDatabaseRepository, findStudentsRepository, saveStudentAtDatabaseRepository } from "../repositories/studentRepository";
+import { countStudentRepository, deleteStudentAtDatabaseRepository, editStudentAtDatabaseRepository, findStudentExistAtDatabaseRepository, findStudentsRepository, saveStudentAtDatabaseRepository } from "../repositories/studentRepository.js";
 
 
 type Type = "name" | "class" | "age" | "";

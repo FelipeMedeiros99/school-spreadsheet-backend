@@ -1,6 +1,4 @@
-import Joi, { number } from "joi";
-
-import { Student } from "@prisma/client";
+import Joi from "joi";
 
 export const studentSchema = Joi.object({
   age: Joi

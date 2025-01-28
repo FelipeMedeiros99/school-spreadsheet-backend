@@ -2,9 +2,9 @@ import express, {json} from "express";
 import cors from "cors";
 import "dotenv/config";
 
-import router from "./routers";
-import errorHandleMiddleware from "./middlewares/errorHandleMiddleware";
-import { deleteExpiredTokensService } from "./services/authenticationServices";
+import router from "./routers/index.js";
+import errorHandleMiddleware from "./middlewares/errorHandleMiddleware.js";
+import { deleteExpiredTokensService } from "./services/authenticationServices.js";
 
 const app = express();
 app.use(cors());

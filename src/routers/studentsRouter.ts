@@ -1,9 +1,9 @@
 import { Router } from "express";
 
-import { addStudentController, deleteStudentController, editStudentController, getStudentsController, getStudentsCountController } from "../controllers/studentsControllers";
-import { findStudentsController } from "../middlewares/studentsMiddlewares";
-import { validateSchema, validIfStudentExistsMiddleware, validTokenMiddleware } from "../middlewares/validationsMiddlewares";
-import { studentSchema, updateStudentSchema } from "../schemas/studentsSchemas";
+import { addStudentController, deleteStudentController, editStudentController, getStudentsController, getStudentsCountController } from "../controllers/studentsControllers.js";
+import { findStudentsController } from "../middlewares/studentsMiddlewares.js";
+import { validateSchema, validIfStudentExistsMiddleware, validTokenMiddleware } from "../middlewares/validationsMiddlewares.js";
+import { studentSchema, updateStudentSchema } from "../schemas/studentsSchemas.js";
 
 
 const studentsRouter = Router();

@@ -1,5 +1,5 @@
-import prisma from "../config";
-import { EditStudentData, StudentData } from "../services/studentsServices";
+import prisma from "../config/index.js";
+import { EditStudentData, StudentData } from "../services/studentsServices.js";
 
 interface StudentFilter {
   type: "name" | "class" | "age" | "",
