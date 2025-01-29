@@ -5,9 +5,11 @@ import "dotenv/config";
 import router from "./routers/index.js";
 import errorHandleMiddleware from "./middlewares/errorHandleMiddleware.js";
 import { deleteExpiredTokensService } from "./services/authenticationServices.js";
+import { corsOptions } from "./config/index.js";
 
 const app = express();
-app.use(cors());
+
+app.use(cors(corsOptions));
 app.use(json());
 
 app.use(router);
