@@ -79,13 +79,14 @@ Credenciais para conectar na render (protocolo https):
 
 
 ## Bibliotecas utilizadas 
-- node
+- tsx 
 - express
 - jsonwebtoken 
 - joi 
 - dotenv 
 - cors 
 - bcrytp 
+- typescript
 
 
 # INSTALAÇÃO
