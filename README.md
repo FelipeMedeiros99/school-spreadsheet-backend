@@ -9,10 +9,10 @@ O servidor foi hospedado em duas instancia diferentes para testes:
 
   - Também foi hospedado na plataforma **Render**, utilizando o protocolo https, que permite a conexão com o [frontend](https://school-spreadsheet-front.vercel.app/home) hospedado na plataforma vercel. 
 
-  *Obs: O servidor hospedado na plataforma Render entra em hibernação após determinado período de inatividade, devido à isso, pode apresentar bastante lentidão no primeiro acesso. Preferível testar usando o link da AWS* 
+> *Obs: O servidor hospedado na plataforma Render entra em hibernação após determinado período de inatividade, devido à isso, pode apresentar bastante lentidão no primeiro acesso. Preferível testar usando o link da AWS* 
 
 
-  *Obs2: Ambos os bancos foram populados com dados fictícios para facilitação dos testes e visualização das funcionalidades criadas*
+> *Obs2: Ambos os bancos foram populados com dados fictícios para facilitação dos testes e visualização das funcionalidades criadas*
 
 Credenciais para conectar no servidor aws (protocolo http): 
   ```bash
