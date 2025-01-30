@@ -27,7 +27,7 @@ Credenciais para conectar na render (protocolo https):
 
 ## Funcionalidades
 
-### Autenticação
+### Rotas de autenticação
 1. Criação de novo usuário: 
     - rota utilizada: post("/sign-up")
     - Para cadastro de usuário, é necessário enviar um objeto válido, contendo as informações de email, senha e confirmação de senha. 
@@ -45,7 +45,7 @@ Credenciais para conectar na render (protocolo https):
     - É o token é salvo no banco de dados, para validações de credenciais. 
     - O token é excluído após 15 minutos, sendo necessário fazer login novamente. 
 
-### Rotas dos estudantes 
+### Rotas de estudantes 
   Em todas as todas relacionadas aos estudantes, é feito validação de token. Caso o token esteja expirado, todas as ações de leitura, escrita, edição e remoção ficam bloqueadas, retornando um erro para o usuário.
 
 1. Buscar a quantidade de estudantes estudantes: 
