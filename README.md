@@ -4,26 +4,19 @@ Este é o projeto de uma API que controla o cadastro de estudantes e usuários, 
 
 ## Hospedagem
 
-O servidor foi hospedado em duas instancia diferentes para testes: 
+Levando em consideração que a hospedagem na AWS seria um diferencial, todo o projeto foi hospedado lá na **AWS**, 
   - Na **AWS**, utilizando o EC2 e o protocolo http, facilitando a comunicação com o [frontend](http://school-spreadsheet-front.s3-website-sa-east-1.amazonaws.com/sign-in) também hospedado na aws usando o S3. 
 
   - Também foi hospedado na plataforma **Render**, utilizando o protocolo https, que permite a conexão com o [frontend](https://school-spreadsheet-front.vercel.app/home) hospedado na plataforma vercel. 
 
-> *Obs: O servidor hospedado na plataforma Render entra em hibernação após determinado período de inatividade, devido à isso, pode apresentar bastante lentidão no primeiro acesso. Preferível testar usando o link da AWS* 
 
 
-> *Obs2: Ambos os bancos foram populados com dados fictícios para facilitação dos testes e visualização das funcionalidades criadas*
+> *Obs: O banco de dados foi populado com dados fictícios para facilitação dos testes e visualização das funcionalidades criadas*
 
 Credenciais para conectar no servidor aws (protocolo http): 
   ```bash
   http://18.231.155.115:5000
   ```
-
-Credenciais para conectar na render (protocolo https): 
-  ```bash
-  https://school-spreadsheet-backend.onrender.com
-  ```
-
 
 ## Funcionalidades
 
