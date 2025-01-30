@@ -121,6 +121,25 @@ Credenciais para conectar no servidor aws (protocolo http):
 
   ```bash 
   npm rum seed
-  ``` 
+  ```
 
+## Executando em modo de desenvolvimento: 
+
+1. Execute o comando para rodar o servidor localmente em modo de desenvolvimento:
+   ```bash
+   npm run dev
+   ```
+
+## Executando em modo de produção 
+
+1. Gere a build através do comando:
+   ```bash 
+   npm run build
+   ```
+
+2. E execute o comando para rodar em modo de produção:
+   ```bash
+   npm start
+   ```
+   
 
