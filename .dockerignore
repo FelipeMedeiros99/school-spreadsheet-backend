@@ -1,0 +1,12 @@
+# Ignorar dependências
+node_modules
+dist
+
+# Ignorar arquivos de configuração locais
+.env
+.env.local
+.DS_Store
+
+# Ignorar arquivos de controle de versão
+.git
+.gitignore

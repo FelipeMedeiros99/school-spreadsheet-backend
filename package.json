@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "npx prisma migrate deploy && npx prisma generate && node dist/index.js",
     "dev": "tsx watch src/index.ts",
+    "db:deploy": "npx prisma migrate deploy && npx prisma generate",
     "seed": "prisma migrate reset && tsx prisma/seed.ts"
   },
   "keywords": [],
