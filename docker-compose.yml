@@ -24,10 +24,10 @@ services:
     networks:
       - school-spreadsheet
 
-  course-management-backend:
+  school-spreadsheet-api:
     build: .
-    image: course-management-backend
-    container_name: course-management-backend
+    image: school-spreadsheet-api
+    container_name: school-spreadsheet-api
     env_file:
       - .env
     ports:
