@@ -1,11 +1,13 @@
-FROM node:20-alpine3.17
+FROM node:20
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package.json package-lock.json ./
 
 RUN npm ci
 
 COPY . .
+
+RUN npm run build
 
 CMD ["sh", "-c", "npm run db:deploy && npm start"]

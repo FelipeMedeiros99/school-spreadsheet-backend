@@ -21,6 +21,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+    command: postgres -c listen_addresses='*'
+
     networks:
       - school-spreadsheet
 
